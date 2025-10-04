@@ -74,14 +74,12 @@ CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            # Se a Render fornecer uma URL REDIS_URL, use-a.
-            # Certifique-se de que esta URL está configurada como variável de ambiente
-            # no seu serviço Render!
-            "hosts": [os.environ.get("REDIS_URL", "redis://localhost:6379")], 
+            # O get("REDIS_URL") irá buscar o valor do Upstash que você definiu na Render
+            # É importante que este valor seja uma lista (hosts)
+            "hosts": [os.environ.get("REDIS_URL")], 
         },
     },
 }
-
 # Permite que a Render atue como proxy e que o Django confie na origem WSS
 CSRF_TRUSTED_ORIGINS = [
     'https://chatpeba.onrender.com',
