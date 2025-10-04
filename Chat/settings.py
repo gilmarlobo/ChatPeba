@@ -72,7 +72,7 @@ WSGI_APPLICATION = 'Chat.wsgi.application'
 # Canal layer (precisa do Redis rodando: redis-server)
 CHANNEL_LAYERS = {
     "default": {
-        "BACKEND": "channels_redis.pubsub.RedisChannelLayer",
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
             # Se a Render fornecer uma URL REDIS_URL, use-a.
             # Certifique-se de que esta URL está configurada como variável de ambiente
