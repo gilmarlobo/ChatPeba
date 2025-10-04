@@ -25,6 +25,8 @@ ALLOWED_HOSTS = [
 
 ASGI_APPLICATION = "Chat.asgi.application"
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
 
 # Application definition
 
