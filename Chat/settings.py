@@ -77,7 +77,7 @@ CHANNEL_LAYERS = {
             # Se a Render fornecer uma URL REDIS_URL, use-a.
             # Certifique-se de que esta URL está configurada como variável de ambiente
             # no seu serviço Render!
-            "URL": os.environ.get("REDIS_URL", "redis://localhost:6379"), 
+            "hosts": [os.environ.get("REDIS_URL", "redis://localhost:6379")], 
         },
     },
 }
