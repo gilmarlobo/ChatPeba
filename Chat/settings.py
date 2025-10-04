@@ -14,18 +14,28 @@ SECRET_KEY = 'django-insecure-n$jjd&0*2shqq0#ut0nk$bi8+rq^$&#(b8%62her5siw)n9ahr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# --- INÍCIO: AJUSTES DE DEPLOY PARA FLY.IO ---
+# 1. ALLOWED_HOSTS
+# Usamos o wildcard '*' e '.fly.dev' como prática no Fly.io.
 ALLOWED_HOSTS = [
-    'chatpeba.onrender.com', 
     '127.0.0.1', 
     'localhost',
-    # Entrada para a subdomínio genérico da Render
-    '.onrender.com', 
-    '*' # Wildcard para máxima compatibilidade na Render
+    '.fly.dev', # Domínio padrão do Fly.io
+    '*' # Wildcard para o seu domínio personalizado (ex: chatpeba.fly.dev)
 ]
 
 ASGI_APPLICATION = "Chat.asgi.application"
 
+# 2. CONFIGURAÇÃO CRÍTICA PARA WSS/PROXY (necessário no Fly.io também)
+# Isso instrui o Django a tratar a requisição como segura (https/wss).
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# 3. CSRF_TRUSTED_ORIGINS
+# ESSENCIAL para WebSockets (WSS) e HTTPS.
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.fly.dev',
+]
+# --- FIM: AJUSTES DE DEPLOY PARA FLY.IO ---
 
 
 # Application definition
@@ -83,11 +93,6 @@ CHANNEL_LAYERS = {
         },
     },
 }
-# Permite que a Render atue como proxy e que o Django confie na origem WSS
-CSRF_TRUSTED_ORIGINS = [
-    'https://chatpeba.onrender.com',
-    'https://*.onrender.com', # Permite qualquer subdomínio da Render
-]
 
 
 
