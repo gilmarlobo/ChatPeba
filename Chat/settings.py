@@ -18,8 +18,9 @@ ALLOWED_HOSTS = [
     'chatpeba.onrender.com', 
     '127.0.0.1', 
     'localhost',
-    # Adicione a entrada *.onrender.com para maior flexibilidade
-    '.onrender.com' 
+    # Entrada para a subdomínio genérico da Render
+    '.onrender.com', 
+    '*' # Wildcard para máxima compatibilidade na Render
 ]
 
 ASGI_APPLICATION = "Chat.asgi.application"
