@@ -26,7 +26,8 @@ SECRET_KEY = 'django-insecure-n$jjd&0*2shqq0#ut0nk$bi8+rq^$&#(b8%62her5siw)n9ahr
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["chatpeba.onrender.com"]
+
 ASGI_APPLICATION = "Chat.asgi.application"
 
 
@@ -76,10 +77,10 @@ WSGI_APPLICATION = 'Chat.wsgi.application'
 
 # Canal layer (precisa do Redis rodando: redis-server)
 CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [os.environ.get('REDIS_URL', 'redis://localhost:6379')],
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("REDIS_URL", 6379)],
         },
     },
 }
@@ -90,9 +91,13 @@ CHANNEL_LAYERS = {
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "nome_do_banco",
+        "USER": "usuario",
+        "PASSWORD": "senha",
+        "HOST": "host_do_render",
+        "PORT": "5432",
     }
 }
 
